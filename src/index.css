@@ -1,0 +1,194 @@
+
+
+@import "tailwindcss";
+
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-subtle: pulse-subtle 5s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.55s ease-out forwards;
+  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.12s forwards;
+  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.24s forwards;
+  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.36s forwards;
+  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.48s forwards;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes pulse-subtle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+}
+
+
+@layer base {
+  :root {
+    
+    --background: 45 20% 97%;       
+    --foreground: 220 35% 6%;      
+
+    --card: 0 0% 100%;             
+    --border: 220 14% 90%;          
+
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 10% 40%;
+
+    --primary: 188 33% 70%;
+    --primary-foreground: 220 35% 6%;
+  }
+
+  .dark {
+    --background: 220 20% 8%;
+    --foreground: 210 25% 92%;
+
+    --card: 220 18% 12%;
+    --border: 220 14% 22%;
+
+    --muted: 220 18% 14%;
+    --muted-foreground: 210 14% 75%;
+
+    --primary: 188 33% 70%;
+    --primary-foreground: 220 20% 8%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+  @media (width >= 1400px) {
+    max-width: 1200px;
+  }
+}
+
+@utility text-glow {
+  @apply relative;
+  text-shadow: none;
+}
+
+@utility card-hover {
+  @apply transition-transform duration-200 hover:-translate-y-0.5;
+}
+
+@utility gradient-border {
+  @apply rounded-xl border border-border bg-card;
+}
+
+@utility cosmic-button {
+  @apply inline-flex items-center justify-center
+         px-6 py-2.5 rounded-full
+         bg-primary text-primary-foreground font-medium
+         transition-colors duration-200
+         hover:opacity-90 active:opacity-95;
+}
+
+@utility pill {
+  @apply px-3 py-1 rounded-full text-xs font-medium
+         border border-border bg-background;
+}
+
+
+@utility highlight-teal {
+  @apply relative inline-block;
+}
+@utility highlight-lavender {
+  @apply relative inline-block;
+}
+@layer utilities {
+  .highlight-teal::after {
+    content: "";
+    position: absolute;
+    left: -0.35rem;
+    right: -0.35rem;
+    bottom: 0.15rem;
+    height: 0.65rem;
+    border-radius: 9999px;
+    background: rgba(153, 196, 202, 0.45); /* #99c4ca */
+    z-index: 0;
+  }
+  .highlight-lavender::after {
+    content: "";
+    position: absolute;
+    left: -0.35rem;
+    right: -0.35rem;
+    bottom: 0.15rem;
+    height: 0.65rem;
+    border-radius: 9999px;
+    background: rgba(186, 167, 214, 0.45); /* #baa7d6 */
+    z-index: 0;
+  }
+  .highlight-teal > *,
+  .highlight-lavender > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
